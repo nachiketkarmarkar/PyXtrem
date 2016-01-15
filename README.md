@@ -1,5 +1,4 @@
 # PyXtrem
-======================
 PyXtrem is a library comprising of python modules that simplifies the consumption of XtremIO REST API.
 
 ## Description
