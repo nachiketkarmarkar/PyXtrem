@@ -11,6 +11,24 @@ def getXms(ip,user,pwd):
         print "Error:",e
         return 1
 
+def getCurrentDedupRatio(ip,user,pwd,clusterid="1"):
+    try:
+        response = requests.get('https://%s/api/json/v2/types/clusters/%s' %(ip,clusterid),auth=(user,pwd),verify=False)
+    except requests.exceptions.RequestException as e:
+        print "Error:",e
+        return 1
+    if response.status_code == 200:
+        return round(float(json.loads(response.text)['content']['dedup-ratio']),2)
+
+def getCurrentCompressionFactor(ip,user,pwd,clusterid="1"):
+    try:
+        response = requests.get('https://%s/api/json/v2/types/clusters/%s' %(ip,clusterid),auth=(user,pwd),verify=False)
+    except requests.exceptions.RequestException as e:
+        print "Error:",e
+        return 1
+    if response.status_code == 200:
+        return round(float(json.loads(response.text)['content']['compression-factor']),2)
+
 def getXmsReadlatency(ip,user,pwd):
     try:
         response = requests.get('https://%s/api/json/v2/types/xenvs/?name=xms' %(ip),auth=(user,pwd),verify=False)
